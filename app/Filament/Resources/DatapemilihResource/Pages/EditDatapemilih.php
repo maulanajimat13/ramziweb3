@@ -1,0 +1,19 @@
+<?php
+
+namespace App\Filament\Resources\DatapemilihResource\Pages;
+
+use App\Filament\Resources\DatapemilihResource;
+use Filament\Actions;
+use Filament\Resources\Pages\EditRecord;
+
+class EditDatapemilih extends EditRecord
+{
+    protected static string $resource = DatapemilihResource::class;
+
+    protected function getHeaderActions(): array
+    {
+        return [
+            Actions\DeleteAction::make(),
+        ];
+    }
+}
