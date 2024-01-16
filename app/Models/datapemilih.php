@@ -8,4 +8,17 @@ use Illuminate\Database\Eloquent\Model;
 class datapemilih extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'nama',
+        'nik',
+        'NomorHP',
+        'Kampung',
+        'Rt',
+        'Rw',
+        'Desa',
+        'Kecamatan',
+        'TPS',
+        'Nama_Relawan',
+        'Koordinator'
+    ];
 }

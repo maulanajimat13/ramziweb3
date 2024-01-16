@@ -17,6 +17,7 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 class DatapemilihResource extends Resource
 {
     protected static ?string $model = Datapemilih::class;
+    protected static ?string $modelLabel = 'Data Pemilih';
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
@@ -24,16 +25,16 @@ class DatapemilihResource extends Resource
     {
         return $form
             ->schema([
-                Card::make()->schema([
+               // Card::make()->schema([
                 Forms\Components\TextInput::make('Nama')
                     ->required()
                     ->maxLength(255),
                 Forms\Components\TextInput::make('NIK')
-                    ->required()
+                    ->required()->label('NIK')
                     ->maxLength(255),
                 Forms\Components\TextInput::make('NomorHP')
-                    ->required()
-                    ->maxLength(255),
+                    ->required()->label('Nomor HP')
+                    ->maxLength(255)->unique(ignoreRecord: true),
                 Forms\Components\TextInput::make('Kampung')
                     ->required()
                     ->maxLength(255),
@@ -51,14 +52,17 @@ class DatapemilihResource extends Resource
                     ->maxLength(255),
                 Forms\Components\TextInput::make('TPS')
                     ->required()
-                    ->maxLength(255),
+                    ->maxLength(255)->label('TPS'),
                 Forms\Components\TextInput::make('Nama_Relawan')
-                    ->required()
+                    ->required()->label('Nama Relawan')
                     ->maxLength(255),
-                Forms\Components\TextInput::make('Koordinator')
+                Forms\Components\Select::make('Koordinator')
                     ->required()
-                    ->maxLength(255),
-                ])
+                    ->options([
+                        'Gunawan' => 'Gunawan',
+                        'reviewing' => 'Reviewing'
+                    ]),
+               // ])
                 ]);
     }
 
@@ -69,9 +73,9 @@ class DatapemilihResource extends Resource
                 Tables\Columns\TextColumn::make('Nama')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('NIK')
-                    ->searchable(),
+                    ->searchable()->label('NIK'),
                 Tables\Columns\TextColumn::make('NomorHP')
-                    ->searchable(),
+                    ->searchable()->label('Nomor HP'),
                 Tables\Columns\TextColumn::make('Kampung')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('Rt')
@@ -83,9 +87,9 @@ class DatapemilihResource extends Resource
                 Tables\Columns\TextColumn::make('Kecamatan')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('TPS')
-                    ->searchable(),
+                    ->searchable()->label('TPS'),
                 Tables\Columns\TextColumn::make('Nama_Relawan')
-                    ->searchable(),
+                    ->searchable()->label('Nama Relawan'),
                 Tables\Columns\TextColumn::make('Koordinator')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
@@ -125,4 +129,8 @@ class DatapemilihResource extends Resource
             'edit' => Pages\EditDatapemilih::route('/{record}/edit'),
         ];
     }
+//     public static function getEloquentQuery(): Builder
+// {
+//     return parent::getEloquentQuery()->where('koordinator', 'like' ,'gunawan');
+// }
 }
