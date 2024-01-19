@@ -11,7 +11,9 @@ class KecamatanChart extends ChartWidget
 {
     protected static ?string $heading = 'Data per Kecamatan';
 
-    protected static ?int $sort = 3;
+    
+    protected static ?int $sort = 1;
+    protected int | string | array $columnSpan = 'full';
 
     protected function getData(): array
     {
@@ -35,9 +37,7 @@ class KecamatanChart extends ChartWidget
 
     private function getDataPerKecamatan(): array
     {
-        $now = Carbon::now();
-
-        $DataPerKecamatan = [
+            $DataPerKecamatan = [
             datapemilih::query()->where('Kecamatan', 'KADUDAMPIT')->count(),
             datapemilih::query()->where('Kecamatan', 'GUNUNGGURUH')->count(),
             datapemilih::query()->where('Kecamatan', 'GEGERBITUNG')->count(),

@@ -69,10 +69,9 @@ class AdminPanelProvider extends PanelProvider
                         'xl' => 5,
                         '2xl' => null,
                     ]),
-                ]);
-                
+                ]);  
             // ->widgets([
-            //     OverlookWidget::class,
+                //OverlookWidget::class,
             // ]);
     }
     }
