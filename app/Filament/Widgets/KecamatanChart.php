@@ -12,8 +12,8 @@ class KecamatanChart extends ChartWidget
     protected static ?string $heading = 'Data per Kecamatan';
 
     
-    protected static ?int $sort = 1;
-    protected int | string | array $columnSpan = 'full';
+    protected static ?int $sort = 3;
+    // protected int | string | array $columnSpan = 'full';
 
     protected function getData(): array
     {
@@ -32,7 +32,7 @@ class KecamatanChart extends ChartWidget
 
     protected function getType(): string
     {
-        return 'line';
+        return 'bar';
     }
 
     private function getDataPerKecamatan(): array

@@ -31,14 +31,20 @@ class StatsOverview extends BaseWidget
         // ];
 
         return [
-            
-            Stat::make('GUNAWAN', datapemilih::query()->where('Koordinator', 'GUNAWAN')->count())->description('Koordinator'),
-            Stat::make('M. ILYAS', datapemilih::query()->where('Koordinator', 'M. ILYAS')->count()),
-            Stat::make('IWAN', datapemilih::query()->where('Koordinator', 'IWAN')->count()),
-            Stat::make('SAHRUL', datapemilih::query()->where('Koordinator', 'SAHRUL')->count()),
-            Stat::make('ERVAN', datapemilih::query()->where('Koordinator', 'ERVAN')->count()),
-            Stat::make('ASEP RAHMAT', datapemilih::query()->where('Koordinator', 'ASEP RAHMAT')->count()),
-            Stat::make('TEMI', datapemilih::query()->where('Koordinator', 'TEMI')->count()),
+            Stat::make('GUNAWAN', datapemilih::query()->where('Koordinator', 'GUNAWAN')->count())->description('orang')
+            ->descriptionIcon('heroicon-m-identification'),
+            Stat::make('M. ILYAS', datapemilih::query()->where('Koordinator', 'M. ILYAS')->count())->description('orang')
+            ->descriptionIcon('heroicon-m-identification'),
+            Stat::make('IWAN', datapemilih::query()->where('Koordinator', 'IWAN')->count())->description('orang')
+            ->descriptionIcon('heroicon-m-identification'),
+            Stat::make('SAHRUL', datapemilih::query()->where('Koordinator', 'SAHRUL')->count())->description('orang')
+            ->descriptionIcon('heroicon-m-identification'),
+            Stat::make('ERVAN', datapemilih::query()->where('Koordinator', 'ERVAN')->count())->description('orang')
+            ->descriptionIcon('heroicon-m-identification'),
+            Stat::make('ASEP RAHMAT', datapemilih::query()->where('Koordinator', 'ASEP RAHMAT')->count())->description('orang')
+            ->descriptionIcon('heroicon-m-identification'),
+            Stat::make('TEMI', datapemilih::query()->where('Koordinator', 'TEMI')->count())->description('orang')
+            ->descriptionIcon('heroicon-m-identification'),
             
         ];
     }

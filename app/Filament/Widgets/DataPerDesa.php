@@ -1,26 +1,57 @@
 <?php
- 
+
 namespace App\Filament\Widgets;
 
-use App\Models\datapemilih;
-use Closure;
+use App\Filament\Resources\DatapemilihResource;
 use Filament\Tables;
+use Filament\Tables\Table;
 use Filament\Widgets\TableWidget as BaseWidget;
-use Illuminate\Database\Eloquent\Builder;
- 
-class LatestOrders extends BaseWidget
+
+class DataPerDesa extends BaseWidget
 {
-    protected function getTableQuery(): Builder
+    protected static ?int $sort = 4;
+    protected int | string | array $columnSpan = 'full';
+
+    public function table(Table $table): Table
     {
-        return datapemilih::query()->where('desa','like','cisaat');
-    }
- 
-    protected function getTableColumns(): array
-    {
-        return [
-            Tables\Columns\TextColumn::make('id'),
-            Tables\Columns\TextColumn::make('nama')
-                ->label('Customer'),
-        ];
+        return $table
+            ->query(
+                DatapemilihResource::getEloquentQuery()
+            )
+            ->defaultPaginationPageOption(option: 5)
+            ->defaultSort(column:'created_at', direction: 'desc')
+            ->columns([
+                Tables\Columns\TextColumn::make('Nama')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('NIK')
+                    ->searchable()->label('NIK'),
+                Tables\Columns\TextColumn::make('NomorHP')
+                    ->searchable()->label('Nomor HP'),
+                Tables\Columns\TextColumn::make('Kampung')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('Rt')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('Rw')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('Desa')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('Kecamatan')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('TPS')
+                    ->searchable()->label('TPS'),
+                Tables\Columns\TextColumn::make('Nama_Relawan')
+                    ->searchable()->label('Nama Relawan'),
+                Tables\Columns\TextColumn::make('Koordinator')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('created_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('updated_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                        ]);
+            
     }
 }

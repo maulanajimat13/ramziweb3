@@ -20,6 +20,7 @@ use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Awcodes\Overlook\OverlookPlugin;
 use Awcodes\Overlook\Widgets\OverlookWidget;
 use Filament\Resources\Components\Tab;
+use Filament\View\LegacyComponents\Widget;
 use Illuminate\Database\Eloquent\Builder;
 
 class AdminPanelProvider extends PanelProvider
@@ -42,7 +43,8 @@ class AdminPanelProvider extends PanelProvider
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
             ->widgets([
                 Widgets\AccountWidget::class,
-                Widgets\FilamentInfoWidget::class,
+                //Widgets\FilamentInfoWidget::class,
+                // Widgets\TotalOverview::class,
             ])
             ->middleware([
                 EncryptCookies::class,
@@ -60,7 +62,7 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->plugins([
                 OverlookPlugin::make()
-                    ->sort(2)
+                    ->sort(1)
                     ->columns([
                         'default' => 1,
                         'sm' => 2,
