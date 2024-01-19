@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Filament\Notifications\Notification;
 use Filament\Pages\Page;
 use Illuminate\Validation\ValidationException;
+use BezhanSalleh\FilamentLanguageSwitch\LanguageSwitch;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -31,5 +32,9 @@ class AppServiceProvider extends ServiceProvider
                 ->danger()
                 ->send();
         };
+        LanguageSwitch::configureUsing(function (LanguageSwitch $switch) {
+            $switch
+                ->locales(['id','en','jp']); // also accepts a closure
+        });
     }
 }
