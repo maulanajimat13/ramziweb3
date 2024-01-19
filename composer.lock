@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5efc0e60123d6c23358d683050e2a9bf",
+    "content-hash": "2f4eb2f85df40e4f0eb0503cdfe79b01",
     "packages": [
         {
             "name": "awcodes/overlook",
