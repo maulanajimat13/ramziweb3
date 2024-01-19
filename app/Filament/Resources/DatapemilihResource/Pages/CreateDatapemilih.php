@@ -18,5 +18,9 @@ class CreateDatapemilih extends CreateRecord
     //         ->warning()
     //         ->send();
     // }
+    protected function getRedirectUrl(): string
+{
+    return $this->getResource()::getUrl('index');
+}
 
 }
