@@ -13,6 +13,10 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Notifications\Notification;
+use Filament\Pages\Page;
+use App\Filament\Resources\ValidationException;
+
 
 class DatapemilihResource extends Resource
 {
@@ -24,46 +28,67 @@ class DatapemilihResource extends Resource
     public static function form(Form $form): Form
     {
         return $form
-            ->schema([
-               // Card::make()->schema([
-                Forms\Components\TextInput::make('Nama')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('NIK')
-                    ->required()->label('NIK')
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('NomorHP')
-                    ->required()->label('Nomor HP')
-                    ->maxLength(255)->unique(ignoreRecord: true),
-                Forms\Components\TextInput::make('Kampung')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('Rt')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('Rw')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('Desa')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('Kecamatan')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('TPS')
-                    ->required()
-                    ->maxLength(255)->label('TPS'),
-                Forms\Components\TextInput::make('Nama_Relawan')
-                    ->required()->label('Nama Relawan')
-                    ->maxLength(255),
-                Forms\Components\Select::make('Koordinator')
-                    ->required()
-                    ->options([
-                        'Gunawan' => 'Gunawan',
-                        'reviewing' => 'Reviewing'
-                    ]),
-               // ])
-                ]);
+        ->schema([
+            Forms\Components\TextInput::make('Nama')
+                ->required()->label('Nama Calon Pemilih')
+                ->autofocus()
+                ->maxLength(255),
+            Forms\Components\TextInput::make('NIK')
+                ->required()->label('NIK')->numeric()
+                // ->minlength(16)
+                ->length(16)
+                ->unique(ignoreRecord: true)
+                ->maxLength(255),
+            Forms\Components\TextInput::make('NomorHP')
+                ->required()->label('Nomor HP')->tel()
+                ->placeholder('08xxxxxxxxxxx')
+                ->telRegex('/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\.\/0-9]*$/')
+                // ->prefix('62')
+                ->maxLength(255)->unique(ignoreRecord: true),
+            Forms\Components\TextInput::make('Kampung')
+                ->required()
+                ->maxLength(255),
+            Forms\Components\TextInput::make('Rt')
+                ->required()->numeric()->label('RT')
+                ->maxLength(3),
+            Forms\Components\TextInput::make('Rw')
+                ->required()->numeric()->label('RW')
+                ->maxLength(3),
+            Forms\Components\TextInput::make('Desa')
+                ->required()
+                ->maxLength(25),
+            Forms\Components\Select::make('Kecamatan')
+                ->required()
+                ->options([
+                    'KADUDAMPIT' => 'KADUDAMPIT',
+                    'GUNUNGGURUH' => 'GUNUNGGURUH',
+                    'GEGERBITUNG' => 'GEGERBITUNG',
+                    'KEBONPEDES' => 'KEBONPEDES',
+                    'SUKALARANG' => 'SUKALARANG',
+                    'SUKABUMI' => 'SUKABUMI',
+                    'CISAAT' => 'CISAAT',
+                    'CIRENGHAS' => 'CIRENGHAS',
+                    'SUKARAJA' => 'SUKARAJA',
+                ]),
+            Forms\Components\Select::make('Koordinator')
+                ->required()
+                ->options([
+                    'GUNAWAN' => 'GUNAWAN',
+                    'M. ILYAS' => 'M. ILYAS',
+                    'IWAN' => 'IWAN',
+                    'SAHRUL' => 'SAHRUL',
+                    'ERVAN' => 'ERVAN',
+                    'ASEP RAHMAT' => 'ASEP RAHMAT',
+                    'TEMI' => 'TEMI',
+                ]),
+            Forms\Components\TextInput::make('TPS')
+                ->required()->numeric()
+                ->maxLength(255)->label('TPS'),
+            Forms\Components\TextInput::make('Nama_Relawan')
+                ->required()->label('Nama Relawan')
+                ->maxLength(255),
+           // ])
+            ]);
     }
 
     public static function table(Table $table): Table
@@ -129,6 +154,7 @@ class DatapemilihResource extends Resource
             'edit' => Pages\EditDatapemilih::route('/{record}/edit'),
         ];
     }
+
 //     public static function getEloquentQuery(): Builder
 // {
 //     return parent::getEloquentQuery()->where('koordinator', 'like' ,'gunawan');
