@@ -16,7 +16,9 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Notifications\Notification;
 use Filament\Pages\Page;
 use App\Filament\Resources\ValidationException;
-
+use pxlrbt\FilamentExcel\Actions\Tables\ExportAction;
+use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
+use pxlrbt\FilamentExcel\Exports\ExcelExport;
 
 class DatapemilihResource extends Resource
 {
@@ -131,8 +133,13 @@ class DatapemilihResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                ExportAction::make()->exports([
+                    ExcelExport::make('table')->fromTable()
+                ]),
             ])
+            
             ->bulkActions([
+                ExportBulkAction::make(),
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
@@ -154,7 +161,7 @@ class DatapemilihResource extends Resource
             'edit' => Pages\EditDatapemilih::route('/{record}/edit'),
         ];
     }
-
+    
 //     public static function getEloquentQuery(): Builder
 // {
 //     return parent::getEloquentQuery()->where('koordinator', 'like' ,'gunawan');
