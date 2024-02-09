@@ -18,11 +18,12 @@ class ListGunawans extends ListRecords
             ExportAction::make()
             ->label('Download Data : Gunawan')
             ->exports([
-                ExcelExport::make('datapemilihs')->fromModel()->only(['Nama','NomorHP'])
+                ExcelExport::make('datapemilihs')->fromModel()//->only(['Nama','NomorHP'])
                 ->modifyQueryUsing(fn ($query) => $query->where('koordinator','like','gunawan'))
                 ->withFilename('gunawan')
-            ])
-            //Actions\CreateAction::make(),
+            ]),
+            
+            Actions\CreateAction::make(),
         ];
     }
 }

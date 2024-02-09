@@ -19,7 +19,7 @@ class ListTemis extends ListRecords
             ExportAction::make()
             ->label('Download Data : Temi')
             ->exports([
-                ExcelExport::make('datapemilihs')->fromModel()->only(['Nama','NomorHP'])
+                ExcelExport::make('datapemilihs')->fromModel()//->//only(['Nama','NomorHP'])
                 ->modifyQueryUsing(fn ($query) => $query->where('koordinator','like','temi'))
                 ->withFilename('TEMI')
             ])

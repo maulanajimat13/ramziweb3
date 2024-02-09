@@ -60,4 +60,5 @@ class IwanResource extends Resource
 {
     return parent::getEloquentQuery()->where('koordinator', 'like' ,'iwan');
 }
+    
 }

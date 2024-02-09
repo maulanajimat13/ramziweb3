@@ -13,6 +13,8 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use pxlrbt\FilamentExcel\Actions\Pages\ExportAction;
+use pxlrbt\FilamentExcel\Exports\ExcelExport;
 
 class IlyasResource extends Resource
 {
@@ -61,4 +63,17 @@ class IlyasResource extends Resource
 {
     return parent::getEloquentQuery()->where('koordinator', 'like' ,'m. ilyas');
 }
+protected function getHeaderActions(): array
+    {
+        return [
+            ExportAction::make()
+            ->label('Download Data : Gunawan')
+            ->exports([
+                ExcelExport::make('datapemilihs')->fromModel()//->only(['Nama','NomorHP'])
+                ->modifyQueryUsing(fn ($query) => $query->where('koordinator','like','m. ilyas'))
+                ->withFilename('ilyas')
+            ])
+            //Actions\CreateAction::make(),
+        ];
+    }
 }

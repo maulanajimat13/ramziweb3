@@ -19,7 +19,7 @@ class ListSahruls extends ListRecords
             ExportAction::make()
             ->label('Download Data : Sahrul')
             ->exports([
-                ExcelExport::make('datapemilihs')->fromModel()->only(['Nama','NomorHP'])
+                ExcelExport::make('datapemilihs')->fromModel()//->only(['Nama','NomorHP'])
                 ->modifyQueryUsing(fn ($query) => $query->where('koordinator','like','sahrul'))
                 ->withFilename('sahrul')
             ])

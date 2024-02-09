@@ -19,10 +19,11 @@ class ListIwans extends ListRecords
             ExportAction::make()
             ->label('Download Data : Iwan')
             ->exports([
-                ExcelExport::make('datapemilihs')->fromModel()->only(['Nama','NomorHP'])
-                ->modifyQueryUsing(fn ($query) => $query->where('koordinator','like','iwan'))
-                ->withFilename('iwan')
-            ])
+                ExcelExport::make('datapemilihs')->fromModel()//->only(['Nama','NomorHP'])
+                ->modifyQueryUsing(fn ($query) => $query->where('koordinator','like','Iwan'))
+                ->withFilename('Iwan')
+            ]),
+            
         ];
     }
 }

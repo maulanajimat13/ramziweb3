@@ -20,7 +20,7 @@ class ListAseps extends ListRecords
             ExportAction::make()
             ->label('Download Data : Asep Rahmat')
             ->exports([
-                ExcelExport::make('datapemilihs')->fromModel()->only(['Nama','NomorHP'])
+                ExcelExport::make('datapemilihs')->fromModel()//->only(['Nama','NomorHP'])
                 ->modifyQueryUsing(fn ($query) => $query->where('koordinator','like','asep rahmat'))
                 ->withFilename('Asep Rahmat- '. Carbon::now()->toDateTimeString()),
             ])

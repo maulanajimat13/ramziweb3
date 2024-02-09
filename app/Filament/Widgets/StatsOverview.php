@@ -47,6 +47,8 @@ class StatsOverview extends BaseWidget
             ->descriptionIcon('heroicon-m-identification'),
             Stat::make('TEMI', datapemilih::query()->where('Koordinator', 'TEMI')->count())->description('orang')
             ->descriptionIcon('heroicon-m-identification'),
+            Stat::make('MUSLIM', datapemilih::query()->where('Koordinator', 'Muslim')->count())->description('orang')
+            ->descriptionIcon('heroicon-m-identification'),
            
             
         ];
